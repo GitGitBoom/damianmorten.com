@@ -57,9 +57,9 @@ export class Me {
   @Field(_type => Social)
   social!: Social;
 
-  @Field(_type => Project)
+  @Field(_type => Project, {nullable: true})
   currentProject?: Project;
 
   // Currently @FieldResolver won't fire on @Field bug
-  githubHistory?: GithubEvent;
+  githubHistory?: GithubEvent | null;
 }

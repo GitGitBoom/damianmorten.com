@@ -22,7 +22,7 @@ export abstract class MeResolver implements ResolverInterface<Me> {
     return Object.assign(new Me(), HardCodedMe);
   }
 
-  @FieldResolver(_returns => GithubEvent)
+  @FieldResolver(_returns => GithubEvent, {nullable: true})
   async githubHistory(
     @Root() me: Me,
   ) {
@@ -30,9 +30,13 @@ export abstract class MeResolver implements ResolverInterface<Me> {
       username: me.social.github,
     })
     .catch(() => {
-      throw new Error('Unable to fetch Github user data')
+      // silence
     })
-    
-    return Object.assign(new GithubEvent(), response.data.shift())
+
+    if (response && response?.data) {
+      return Object.assign(new GithubEvent(), response.data.shift())
+    }
+
+    return null;
   }
 }
