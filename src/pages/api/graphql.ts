@@ -1,7 +1,7 @@
 import "reflect-metadata"
 import {NextApiRequest, NextApiResponse} from 'next'
 import { ApolloServer } from 'apollo-server-micro'
-import { MeResolver } from '../../graphql/me-resolver'
+import { MeResolver } from '@/graphql/me-resolver'
 import { buildSchema } from 'type-graphql'
 
 export const config = {

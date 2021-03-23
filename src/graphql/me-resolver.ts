@@ -5,17 +5,15 @@ import {
   FieldResolver,
   ResolverInterface,
 } from "type-graphql";
-import { Me, GithubEvent } from './me-type'
+import * as HardCodedMe from '@/constants/me' 
+import { Me, GithubEvent } from '@/graphql/me-type'
 import { Octokit } from '@octokit/rest';
 const octokit = new Octokit();
 
-const HardCodedMe = {
-  name: 'Damian Morten',
-  email: 'damianmorten@gmail.com',
-  githubUsername: 'GitGitBoom',
-  soUsername: 'GitGitBoom',
-}
-
+/**
+ * Spin up basic graphQL resolvers to provide 'me' data
+ * Interact with apis, cms, or a db
+ */
 @Resolver(_of => Me)
 export abstract class MeResolver implements ResolverInterface<Me> {
 
@@ -29,7 +27,7 @@ export abstract class MeResolver implements ResolverInterface<Me> {
     @Root() me: Me,
   ) {
     const response = await octokit.activity.listPublicEventsForUser({
-      username: me.githubUsername,
+      username: me.social.github,
     })
     .catch(() => {
       throw new Error('Unable to fetch Github user data')
@@ -37,5 +35,4 @@ export abstract class MeResolver implements ResolverInterface<Me> {
     
     return Object.assign(new GithubEvent(), response.data.shift())
   }
-
 }
