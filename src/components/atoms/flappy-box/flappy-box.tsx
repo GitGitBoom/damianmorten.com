@@ -34,7 +34,7 @@ const GradiantMap = {
 }
 
 export interface Props extends MotionBoxProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   duration?: number;
   delay?: number;
   zIndex?: number;
