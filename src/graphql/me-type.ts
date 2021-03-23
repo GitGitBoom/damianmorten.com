@@ -27,7 +27,23 @@ export class GithubEvent {
   
   @Field(_type => String)
   stackoverflow!: string;
- }
+}
+
+
+/**
+ * Latest project
+ */
+ @ObjectType()
+ export class Project {
+  @Field(_type => String)
+  title!: string;
+
+  @Field(_type => String)
+  link!: string;
+  
+  @Field(_type => String)
+  image!: string;
+}
 
  
 /**
@@ -40,6 +56,9 @@ export class Me {
 
   @Field(_type => Social)
   social!: Social;
+
+  @Field(_type => Project)
+  currentProject?: Project;
 
   // Currently @FieldResolver won't fire on @Field bug
   githubHistory?: GithubEvent;

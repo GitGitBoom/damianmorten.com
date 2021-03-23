@@ -1,68 +1,74 @@
-import { Flex, Link} from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import { FlappyBox } from '@/components/atoms/flappy-box';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome'
 import {faStackOverflow, faGithub} from '@fortawesome/free-brands-svg-icons'
 import {faEnvelope, faList} from '@fortawesome/free-solid-svg-icons'
-import styled from "@emotion/styled";
+import { Link } from '@/atoms/link'
+import type { Me } from '@/graphql/me-type'
 
-const StyledLink = styled(Link)`
-  flex: 1;
-  &:focus, &:active {
-    box-shadow: 0 0 0;
-    outline: 0;
+const configMap: {
+  [key: string]: {
+    getLink: (str: string) => string,
+    icon: FontAwesomeIconProps["icon"],
+    bg: string
   }
-`
-
-const icons = [
-  {
-    icon: faStackOverflow,
-    link: 'https://stackoverflow.com',
-    bg: 'cyan.300'
-  },
-  {
+} = {
+  github: {
+    getLink: (username: string) => `https://github.com/${username}`,
     icon: faGithub,
-    link: 'https://github.com',
     bg: 'cyan.400'
   },
-  {
+  stackoverflow: {
+    getLink: (userId: string) => `https://stackoverflow.com/users/${userId}`,
+    icon: faStackOverflow,
+    bg: 'cyan.300'
+  },
+  email: {
+    getLink: (email: string) => `mailto:${email}`,
     icon: faEnvelope,
-    link: 'https://gmail.com',
     bg: 'cyan.500'
   },
-  {
+  cv: {
+    getLink: (url: string) => url,
     icon: faList,
-    link: 'https://gmail.com',
     bg: 'cyan.600'
-  },
-];
+  }
+}
 
 export interface Props {
   delay?: number,
-  staggerDelay?: number
+  staggerDelay?: number,
+  social: Me["social"]
 }
 export const SocialIcons: React.FC<Props> = (props) => {
-  const {delay = 0, staggerDelay = 0.6} = props;
+  const {delay = 0, staggerDelay = 0.6, social} = props;
+  const items = Object.entries(social);
+
   return (
     <Flex>
-      {icons.map((options, i) => (
-        <StyledLink href={options.link} isExternal>
-          <FlappyBox
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            openDir="right"
-            hoverDir="top"
-            delay={delay + (icons.length - i - 1) * staggerDelay}
-            paddingTop="calc(50% - 8px)"
-            paddingBottom="calc(50% - 8px)"
-            flexGrow={1}
-            bg={options.bg}
-            color="white"
-          >
-            <FontAwesomeIcon icon={options.icon} /> 
-          </FlappyBox>
-        </StyledLink>
-      ))}
+      {items.map(([type, value], i) => {
+        const config = configMap[type];
+        return (
+          <Link key={type} href={config.getLink(value)} isExternal>
+            <FlappyBox
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              openDir="right"
+              hoverDir="top"
+              delay={delay + (items.length - i - 1) * staggerDelay}
+              paddingTop="calc(50% - 8px)"
+              paddingBottom="calc(50% - 8px)"
+              flexGrow={1}
+              bg={config.bg}
+              color="white"
+              fontSize={24}
+            >
+              <FontAwesomeIcon icon={config.icon} />
+            </FlappyBox>
+          </Link>
+        )
+      })}
     </Flex>
   )
 }

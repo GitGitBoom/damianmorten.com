@@ -4,13 +4,13 @@
 export const name = 'Damian Morten'
 
 export const social = {
-  email: 'damianmorten@gmail.com',
   github: 'GitGitBoom',
-  stackoverflow: 'GitGitBoom'
+  stackoverflow: '13885615',
+  email: 'damianmorten@gmail.com',
 }
 
 export const currentProject = {
-  name: 'Divulge',
+  title: 'Divulge',
+  link: 'https://divulge.app',
   image: '/images/divulge-icon-white.png',
-  link: 'https://divulge.app'
 }
