@@ -1,24 +1,7 @@
-// import { Hero } from '@/components/organisms/hero'
+import { Hero } from '@/components/organisms/hero'
 
-interface Props {
-  time: number;
-}
-const Index: React.FC<Props> = (props) => {
+export default function HomePage(): React.ReactNode {
   return (
-    <>
-      {props.time}
-      {/* <Hero /> */}
-    </>
+    <Hero />
   )
-}
-
-export default Index
-
-export async function getStaticProps() {
-  return {
-    props: {
-      time: Date.now()
-    },
-    revalidate: 5
-  };
 }
