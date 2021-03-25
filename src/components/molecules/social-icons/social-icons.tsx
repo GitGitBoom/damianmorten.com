@@ -1,53 +1,56 @@
 import { Flex } from '@chakra-ui/react'
-import { FlappyBox } from '@/components/atoms/flappy-box';
-import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome'
-import {faStackOverflow, faGithub} from '@fortawesome/free-brands-svg-icons'
-import {faEnvelope, faList} from '@fortawesome/free-solid-svg-icons'
+import { FlappyBox } from '@/components/atoms/flappy-box'
+import {
+  FontAwesomeIcon,
+  FontAwesomeIconProps,
+} from '@fortawesome/react-fontawesome'
+import { faStackOverflow, faGithub } from '@fortawesome/free-brands-svg-icons'
+import { faEnvelope, faList } from '@fortawesome/free-solid-svg-icons'
 import { Link } from '@/atoms/link'
 import type { Me } from '@/graphql/me-type'
 
 const configMap: {
   [key: string]: {
-    getLink: (str: string) => string,
-    icon: FontAwesomeIconProps["icon"],
+    getLink: (str: string) => string
+    icon: FontAwesomeIconProps['icon']
     bg: string
   }
 } = {
   github: {
     getLink: (username: string) => `https://github.com/${username}`,
     icon: faGithub,
-    bg: 'cyan.400'
+    bg: 'cyan.400',
   },
   stackoverflow: {
     getLink: (userId: string) => `https://stackoverflow.com/users/${userId}`,
     icon: faStackOverflow,
-    bg: 'cyan.300'
+    bg: 'cyan.300',
   },
   email: {
     getLink: (email: string) => `mailto:${email}`,
     icon: faEnvelope,
-    bg: 'cyan.500'
+    bg: 'cyan.500',
   },
   cv: {
     getLink: (url: string) => url,
     icon: faList,
-    bg: 'cyan.600'
-  }
+    bg: 'cyan.600',
+  },
 }
 
 export interface Props {
-  delay?: number,
-  staggerDelay?: number,
-  social: Me["social"]
+  delay?: number
+  staggerDelay?: number
+  social: Me['social']
 }
 export const SocialIcons: React.FC<Props> = (props) => {
-  const {delay = 0, staggerDelay = 0.6, social} = props;
-  const items = Object.entries(social);
+  const { delay = 0, staggerDelay = 0.6, social } = props
+  const items = Object.entries(social)
 
   return (
     <Flex>
       {items.map(([type, value], i) => {
-        const config = configMap[type];
+        const config = configMap[type]
         return (
           <Link key={type} href={config.getLink(value)} isExternal>
             <FlappyBox
