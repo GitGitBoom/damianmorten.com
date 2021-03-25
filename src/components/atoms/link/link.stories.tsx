@@ -8,10 +8,10 @@ export default {
   component: Link,
 } as Meta
 
-const Template: Story<Props> = (args) => <Link {...args} />;
+const Template: Story<Props> = (args) => <Link {...args} />
 
-export const Default = Template.bind({});
+export const Default = Template.bind({})
 Default.args = {
   padding: 20,
-  children: 'I\'m an unstyled link'
-};
+  children: "I'm an unstyled link",
+}
