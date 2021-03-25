@@ -20,6 +20,7 @@ module.exports = {
         plugins: [new TsconfigPathsPlugin()],
         alias: {
           ...config.resolve.alias,
+          "swr": require.resolve('../__mocks__/swr.tsx'),
           "@emotion/core": toPath("node_modules/@emotion/react"),
           "emotion-theming": toPath("node_modules/@emotion/react"),
         },
