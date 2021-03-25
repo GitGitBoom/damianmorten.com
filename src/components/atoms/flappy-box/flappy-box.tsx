@@ -1,133 +1,113 @@
-import {useState, useRef} from 'react'
-import Motion from 'framer-motion';
-import { MotionBox } from '@/atoms/motion-box';
-import type {Props as MotionBoxProps} from '@/atoms/motion-box';
+import { useState, useEffect } from 'react'
+import { MotionBox } from '@/atoms/motion-box'
+import type { Props as MotionBoxProps } from '@/atoms/motion-box'
+import type { MotionValue } from 'framer-motion'
+import { useSpring, useTransform, useMotionTemplate } from 'framer-motion'
 
-export type Direction = 'top' | 'right' | 'bottom' | 'left';
+export type Direction = 'top' | 'right' | 'bottom' | 'left'
 
-const IntroBoxShadowMap = {
-  top: "0px 100px",
-  right: "-100px 0px",
-  bottom: "0px -100px",
-  left: "100px 0px"
+const BoxShadowDistanceMap: { [key: string]: { x: number; y: number } } = {
+  top: { x: 0, y: 100 },
+  right: { x: -100, y: 0 },
+  bottom: { x: 0, y: -100 },
+  left: { x: 100, y: 0 },
 }
 
-const HoverBoxShadowMap = {
-  top: "0px 25px",
-  right: "-25px 0px",
-  bottom: "0px -25px",
-  left: "25px 0px"
+const HoverDegreeMap = {
+  top: 25,
+  left: 25,
+  bottom: -25,
+  right: -25,
 }
 
 const RotateMap = {
-  top: "rotateX",
-  right: "rotateY",
-  bottom: "rotateX",
-  left: "rotateY"
+  top: 'rotateX',
+  right: 'rotateY',
+  bottom: 'rotateX',
+  left: 'rotateY',
 }
 
 const GradiantMap = {
-  top: "25deg, white, #0F0F0F 70%",
-  right: "115deg, white, #0F0F0F 70%",
-  bottom: "-205deg, white, #0F0F0F 70%",
-  left: "-115deg, white, #0F0F0F 70%"
+  top: '25deg, white, #0F0F0F 70%',
+  right: '115deg, white, #0F0F0F 70%',
+  bottom: '-205deg, white, #0F0F0F 70%',
+  left: '-115deg, white, #0F0F0F 70%',
 }
 
 export interface Props extends MotionBoxProps {
-  children?: React.ReactNode;
-  duration?: number;
-  delay?: number;
-  zIndex?: number;
-  openDir?: Direction;
-  hoverDir?: Direction;
+  children?: React.ReactNode
+  delay?: number
+  openDir?: Direction
+  hoverDir?: Direction
+}
+
+function useDirectionalBoxShadow(
+  direction: string,
+  percent: MotionValue
+): MotionValue<string> {
+  const shadowDistX = useTransform(
+    percent,
+    (p: number) => BoxShadowDistanceMap[direction].x * p
+  )
+  const shadowDistY = useTransform(
+    percent,
+    (p: number) => BoxShadowDistanceMap[direction].y * p
+  )
+  const template = useMotionTemplate`${shadowDistX}px ${shadowDistY}px 20px rgba(0, 0, 0, ${percent})`
+  return template
 }
 
 export const FlappyBox: React.FC<Props> = (props) => {
-  const [isHover, setIsHover] = useState(false);
-  const introFinished = useRef(false);
+  const [introFinished, setIntroFinished] = useState(false)
   const {
     children,
-    duration = 5,
     delay = 1,
-    openDir = 'right',
+    openDir = 'top',
     hoverDir = openDir,
-    zIndex = 1,
     ...restOfProps
-  } = props;
+  } = props
 
-  const introTransition = {
-    type: 'spring',
-    bounce: 0.7,
-    duration,
-    delay
-  }
+  const direction = introFinished ? hoverDir : openDir
+  const rotateSpring = useSpring(90, { damping: 10 })
+  const shadowOpacity: any = useTransform(rotateSpring, [-90, 0, 90], [1, 0, 1])
+  const boxShadow: any = useDirectionalBoxShadow(direction, shadowOpacity)
 
-  const hoverTransition = {
-    // type: 'spring',
-    // bounce: 0.5,
-    duration: 0.75
-  }
-
-  const box: Motion.Variants = {
-    hidden: {
-      transformOrigin: openDir,
-      [RotateMap[openDir]]: 90,
-      boxShadow: `${IntroBoxShadowMap[openDir]} 40px black`
-    },
-    visible: {
-      rotateX: 0,
-      rotateY: 0,
-      boxShadow: `0px 0px 0px black`,
-      transition: introTransition
-    },
-    hover: {
-      transformOrigin: hoverDir,
-      rotateX: 0,
-      rotateY: 0,
-      [RotateMap[hoverDir]]: 15,
-      boxShadow: `${HoverBoxShadowMap[hoverDir]} 30px black`,
-    },
-    unhover: {
-      transformOrigin: hoverDir,
-      rotateX: 0,
-      rotateY: 0,
-      boxShadow: "0px 0px 0px black",
-      transition: hoverTransition,
+  // Since 'spring' hooks don't have callbacks, use an onchange event
+  // to capture the 'intro' animation completion
+  const unsubscribeToChanges = rotateSpring.onChange((deg) => {
+    if (deg === 0) {
+      unsubscribeToChanges()
+      setIntroFinished(true)
     }
-  };
+  })
 
-  const gradient: Motion.Variants = {
-    hidden: {
-      opacity: 1,
-    },
-    visible: {
-      opacity: 0,
-      transition: introTransition
-    },
-    hover: {
-      opacity: 0.2
-    },
-    unhover: {
-      opacity: 0,
-      transition: hoverTransition
-    }
-  };
+  // Animate in
+  useEffect(() => {
+    setTimeout(() => {
+      rotateSpring.set(0)
+    }, delay * 1000)
+  }, [])
 
   return (
     <MotionBox
       {...restOfProps}
-      variants={box}
-      initial="hidden"
-      animate={introFinished.current ? (isHover ? "hover" : "unhover") : "visible"}
-      onAnimationComplete={() => {introFinished.current = true}}
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
+      onMouseEnter={() => {
+        rotateSpring.set(HoverDegreeMap[direction])
+      }}
+      onMouseLeave={() => {
+        rotateSpring.set(0)
+      }}
       position={restOfProps.position ?? 'relative'}
+      transformOrigin={direction}
+      style={{
+        [RotateMap[direction]]: rotateSpring,
+        boxShadow,
+      }}
     >
       {children}
       <MotionBox
-        variants={gradient}
-        bg={`linear-gradient(${GradiantMap[introFinished.current ? hoverDir : openDir]})`}
+        style={{ opacity: shadowOpacity }}
+        bg={`linear-gradient(${GradiantMap[direction]})`}
         position="absolute"
         top={0}
         right={0}
