@@ -57,8 +57,8 @@ export const SocialIcons: React.FC<Props> = (props) => {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              openDir="right"
-              hoverDir="top"
+              openOrigin={['top', 'right']}
+              hoverOrigin="top"
               delay={delay + (items.length - i - 1) * staggerDelay}
               paddingTop="calc(50% - 8px)"
               paddingBottom="calc(50% - 8px)"
