@@ -31,7 +31,7 @@ Default.args = {
   animate: 'visible',
   padding: 30,
   bg: 'blue.400',
-  openDir: 'left',
-  hoverDir: 'left',
+  openOrigin: 'left',
+  hoverOrigin: 'left',
   children: 'I am a blue block.',
 }

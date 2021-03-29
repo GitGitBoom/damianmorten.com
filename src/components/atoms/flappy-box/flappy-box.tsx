@@ -80,13 +80,13 @@ export const FlappyBox: React.FC<Props> = (props) => {
   const boxShadow: any = useDirectionalBoxShadow(direction, shadowOpacity)
 
   useEffect(() => {
-    if (breakpoint) { 
+    if (breakpoint) {
       setTimeout(() => {
         rotateSpring.set(0)
       }, delay * 1000)
     }
   }, [breakpoint])
-  
+
   // Chakra always returns undefined on first render
   if (!breakpoint) {
     return null
@@ -99,7 +99,6 @@ export const FlappyBox: React.FC<Props> = (props) => {
       unsubscribeToChanges()
       setIntroFinished(true)
       onOpenComplete?.()
-      console.log('opened')
     }
   })
 
