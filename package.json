@@ -14,12 +14,6 @@
     "lint": "eslint . --ext ts,tsx,js,jsx",
     "lint:fix": "yarn lint --fix"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn run type-check"
-    }
-  },
   "lint-staged": {
     "*.(ts|tsx)": [
       "yarn format",
