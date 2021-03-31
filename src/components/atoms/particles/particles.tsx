@@ -13,7 +13,7 @@ const ParticlesBase = dynamic(() => import('react-tsparticles'), {
 
 export interface Props {
   avoidSelectors?: string[]
-  loaded: () => void | Promise<void>
+  loaded?: () => void | Promise<void>
 }
 
 export class Particles extends PureComponent<Props> {
