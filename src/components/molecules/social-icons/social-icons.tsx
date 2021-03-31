@@ -39,17 +39,15 @@ const configMap: {
 }
 
 export interface Props {
-  delay?: number
-  staggerDelay?: number
   social: Me['social']
 }
 export const SocialIcons: React.FC<Props> = (props) => {
-  const { delay = 0, staggerDelay = 0.6, social } = props
+  const { social } = props
   const items = Object.entries(social)
 
   return (
     <Flex>
-      {items.map(([type, value], i) => {
+      {items.map(([type, value]) => {
         const config = configMap[type]
         return (
           <Link key={type} href={config.getLink(value)} isExternal>
@@ -57,9 +55,8 @@ export const SocialIcons: React.FC<Props> = (props) => {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              openOrigin={['top', 'right']}
+              openOrigin={['top', 'left']}
               hoverOrigin="top"
-              delay={delay + (items.length - i - 1) * staggerDelay}
               paddingTop="calc(50% - 8px)"
               paddingBottom="calc(50% - 8px)"
               flexGrow={1}
