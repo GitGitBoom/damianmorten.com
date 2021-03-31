@@ -117,7 +117,6 @@ export const FlappyBox: React.FC<Props> = (props) => {
       }}
     >
       {children}
-      {staggerDelay}
       <MotionBox
         style={{ opacity: shadowOpacity }}
         bg={`linear-gradient(${GradiantMap[direction]})`}
