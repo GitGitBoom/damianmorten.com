@@ -38,25 +38,20 @@ export const FlappyGrid: React.FC<HTMLChakraProps<'div'>> = () => {
   }
 
   return (
-    <StaggerTiming staggerBy={1000} wait={2000}>
+    <StaggerTiming staggerBy={400} wait={2000}>
       <Flex direction={['column', 'row']}>
         <Flex direction="column">
-          <FlappyBox
-            openOrigin={['top', 'left']}
-            padding={20}
-            flex={1}
-            bg="blue.400"
-          >
+          <FlappyBox openOrigin="top" padding={20} bg="blue.400">
             <Heading variant="h1">{me.name}</Heading>
           </FlappyBox>
           {me.social && <SocialIcons social={me.social} />}
         </Flex>
+
         <Flex direction={['column', 'column-reverse']}>
           {me.currentProject && (
             <CurrentProject
               openOrigin={['top', 'left']}
-              padding={20}
-              flex={1}
+              padding={14}
               bg="cyan.900"
               {...me.currentProject}
             />
@@ -64,8 +59,8 @@ export const FlappyGrid: React.FC<HTMLChakraProps<'div'>> = () => {
           {me.lastGithubEvent && (
             <LatestGithub
               openOrigin={['top', 'bottom']}
-              padding={20}
-              flex={1}
+              hoverOrigin={['top', 'bottom']}
+              padding={12}
               bg="cyan.800"
               {...me.lastGithubEvent}
             />

@@ -32,13 +32,7 @@ export const LatestGithub: React.FC<Props> = (props) => {
   const { type, link, ...boxProps } = props
   return (
     <Link href={link} isExternal>
-      <FlappyBox
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        flexDirection="column"
-        {...boxProps}
-      >
+      <FlappyBox {...boxProps}>
         <Text mb={2} textTransform="uppercase" textAlign="center" fontSize="xs">
           Latest Action
         </Text>

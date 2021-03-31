@@ -9,13 +9,7 @@ export const CurrentProject: React.FC<Props> = (props) => {
   const { title, link, image, ...boxProps } = props
   return (
     <Link href={link} isExternal>
-      <FlappyBox
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        flexDirection="column"
-        {...boxProps}
-      >
+      <FlappyBox {...boxProps}>
         <Text mb={2} textTransform="uppercase" textAlign="center" fontSize="xs">
           Currently working with
         </Text>

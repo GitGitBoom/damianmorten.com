@@ -63,7 +63,6 @@ export const FlappyBox: React.FC<Props> = (props) => {
   const [introFinished, setIntroFinished] = useState(false)
   const {
     children,
-    position = 'relative',
     openOrigin = 'top',
     hoverOrigin = 'top',
     onOpenComplete,
@@ -102,8 +101,13 @@ export const FlappyBox: React.FC<Props> = (props) => {
 
   return (
     <MotionBox
+      position="relative"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+      flex="1"
       {...restOfProps}
-      position={position}
       transformOrigin={direction}
       onMouseEnter={() => {
         rotateSpring.set(HoverDegreeMap[direction])
