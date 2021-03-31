@@ -8,24 +8,24 @@ export default {
   component: MotionBox,
 } as Meta
 
-const Template: Story<Props> = (args) => <MotionBox {...args} />;
+const Template: Story<Props> = (args) => <MotionBox {...args} />
 
-export const Default = Template.bind({});
+export const Default = Template.bind({})
 Default.args = {
   width: 100,
   height: 100,
   bg: 'blue.400',
   children: 'I am a blue block.',
   position: 'relative',
-  animate: "loop",
+  animate: 'loop',
   variants: {
     loop: {
       left: 'calc(100% - 100px)',
       transition: {
         repeat: Infinity,
-        repeatType: "reverse",
-        duration: 2
-      }
-    }
-  }
-};
+        repeatType: 'reverse',
+        duration: 2,
+      },
+    },
+  },
+}
