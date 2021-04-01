@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { MotionBox } from '@/atoms/motion-box'
 import { useSpring, useTransform, useMotionTemplate } from 'framer-motion'
-import { useBreakpointValue } from 'src/hooks/responsive'
+import { useBreakpointValue } from '@/hooks/responsive'
 import { useBreakpoint } from '@chakra-ui/react'
+import { useStaggerTiming } from '@/hooks/stagger-timing'
 import type { Props as MotionBoxProps } from '@/atoms/motion-box'
 import type { MotionValue } from 'framer-motion'
 
@@ -54,7 +55,6 @@ function useDirectionalBoxShadow(
 
 export interface Props extends MotionBoxProps {
   children?: React.ReactNode
-  delay?: number
   openOrigin?: Direction | Direction[] | Record<string, Direction>
   hoverOrigin?: Direction | Direction[] | Record<string, Direction>
   onOpenComplete?: () => any
@@ -63,15 +63,14 @@ export const FlappyBox: React.FC<Props> = (props) => {
   const [introFinished, setIntroFinished] = useState(false)
   const {
     children,
-    delay = 0,
-    position = 'relative',
     openOrigin = 'top',
-    hoverOrigin = ['top', 'left'],
+    hoverOrigin = 'top',
     onOpenComplete,
     ...restOfProps
   } = props
 
   const breakpoint = useBreakpoint()
+  const staggerDelay = useStaggerTiming()
   const responsiveOpenOrigin = useBreakpointValue(openOrigin, 'top')
   const responsiveHoverOrigin = useBreakpointValue(hoverOrigin, 'top')
   const direction = introFinished ? responsiveHoverOrigin : responsiveOpenOrigin
@@ -80,13 +79,11 @@ export const FlappyBox: React.FC<Props> = (props) => {
   const boxShadow: any = useDirectionalBoxShadow(direction, shadowOpacity)
 
   useEffect(() => {
-    if (breakpoint) { 
-      setTimeout(() => {
-        rotateSpring.set(0)
-      }, delay * 1000)
+    if (breakpoint) {
+      setTimeout(() => rotateSpring.set(0), staggerDelay)
     }
   }, [breakpoint])
-  
+
   // Chakra always returns undefined on first render
   if (!breakpoint) {
     return null
@@ -99,21 +96,21 @@ export const FlappyBox: React.FC<Props> = (props) => {
       unsubscribeToChanges()
       setIntroFinished(true)
       onOpenComplete?.()
-      console.log('opened')
     }
   })
 
   return (
     <MotionBox
+      position="relative"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+      flex="1"
       {...restOfProps}
-      position={position}
       transformOrigin={direction}
-      onMouseEnter={() => {
-        rotateSpring.set(HoverDegreeMap[direction])
-      }}
-      onMouseLeave={() => {
-        rotateSpring.set(0)
-      }}
+      onMouseEnter={() => rotateSpring.set(HoverDegreeMap[direction])}
+      onMouseLeave={() => rotateSpring.set(0)}
       style={{
         [RotateMap[direction]]: rotateSpring,
         boxShadow,

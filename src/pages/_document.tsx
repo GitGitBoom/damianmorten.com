@@ -1,5 +1,6 @@
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 import { ColorModeScript } from '@chakra-ui/react'
+import theme from '../theme'
 
 export default class Document extends NextDocument {
   render(): React.ReactElement {
@@ -13,7 +14,7 @@ export default class Document extends NextDocument {
           />
         </Head>
         <body>
-          <ColorModeScript />
+          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
           <NextScript />
           <script src="https://cdn.rawgit.com/progers/pathseg/master/pathseg.js"></script>

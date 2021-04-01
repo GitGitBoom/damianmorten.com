@@ -9,6 +9,10 @@ export const social = {
   email: 'damianmorten@gmail.com',
 }
 
+export const links = {
+  cv: 'example.com',
+}
+
 export const currentProject = {
   title: 'Divulge',
   link: 'https://divulge.app',

@@ -6,6 +6,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "postinstall": "husky install",
     "storybook": "start-storybook -p 6006 -s ./public",
     "build-storybook": "build-storybook",
     "type-check": "tsc --pretty --noEmit",
@@ -13,16 +14,10 @@
     "lint": "eslint . --ext ts,tsx,js,jsx",
     "lint:fix": "yarn lint --fix"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn run type-check"
-    }
-  },
   "lint-staged": {
     "*.(ts|tsx)": [
       "yarn format",
-      "eslint . --ext ts,tsx"
+      "eslint"
     ]
   },
   "dependencies": {
@@ -37,15 +32,17 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@octokit/rest": "^18.3.5",
+    "@types/lodash": "^4.14.168",
     "apollo-server-micro": "^2.21.2",
     "class-validator": "^0.13.1",
     "framer-motion": "^3.10.3",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
+    "lodash": "^4.17.21",
     "next": "latest",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-tsparticles": "^1.20.1",
+    "react-tsparticles": "^1.24.3",
     "reflect-metadata": "^0.1.13",
     "swr": "^0.5.4",
     "tsparticles": "^1.19.3",

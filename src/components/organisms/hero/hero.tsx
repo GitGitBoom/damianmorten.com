@@ -1,14 +1,12 @@
-import {useState, useCallback} from 'react';
-import { Particles } from '@/atoms/particles/particles';
+import { useState, useCallback } from 'react'
+import { Particles } from '@/atoms/particles'
 import { FlappyGrid } from '@/molecules/flappy-grid'
 import { Box, Flex } from '@chakra-ui/react'
 
-const FADE_IN_DURATION = 750;
-
 export const Hero: React.FC = () => {
-  const [isLoaded, setIsLoaded] = useState(false);  
+  const [isLoaded, setIsLoaded] = useState(false)
   const onLoaded = useCallback(() => {
-    setTimeout(() => setIsLoaded(true), 3000)
+    setTimeout(() => setIsLoaded(true), 1000)
   }, [])
 
   return (
@@ -17,21 +15,24 @@ export const Hero: React.FC = () => {
         minHeight="100vh"
         justify="center"
         alignItems="center"
+        position="relative"
+        zIndex={1}
       >
-        <FlappyGrid className="avoid-grid" />
+        {isLoaded && <FlappyGrid className="avoid-grid" />}
       </Flex>
 
       <Box
-        transition={`all ${FADE_IN_DURATION}ms`}
+        transition="opacity 700ms"
         opacity={isLoaded ? 1 : 0}
+        position="absolute"
+        left={0}
+        top={0}
+        right={0}
+        bottom={0}
+        zIndex={0}
       >
-      <Particles
-        avoidSelectors={['.avoid-grid']}
-        foo
-        doo
-        loaded={onLoaded}
-      />
-    </Box>
-  </>
+        <Particles loaded={onLoaded} />
+      </Box>
+    </>
   )
 }
