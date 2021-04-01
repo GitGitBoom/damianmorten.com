@@ -6,16 +6,9 @@ import {
   ResolverInterface,
 } from 'type-graphql'
 import * as HardCodedMe from 'src/config/me'
-import { Me, GithubEvent, Links } from '@/graphql/me-type'
+import { Me, GithubEvent } from '@/graphql/me-type'
 import { Octokit } from '@octokit/rest'
 const octokit = new Octokit()
-
-const socialLinkFormatMap: Record<string, (str: string) => string> = {
-  github: (username: string) => `https://github.com/${username}`,
-  email: (email: string) => `mailto:${email}`,
-  stackoverflow: (userId: string) =>
-    `https://stackoverflow.com/users/${userId}`,
-}
 
 /**
  * Spin up basic graphQL resolvers to provide 'me' data
@@ -33,41 +26,18 @@ export abstract class MeResolver implements ResolverInterface<Me> {
   }
 
   /**
-   * Links Object
-   * @returns {Links}
-   */
-  @FieldResolver((_returns) => Links, { nullable: true })
-  links(@Root() me: Me): Record<keyof Me['links'], string> {
-    // Map the social usernames to links
-    if (me.social) {
-      const socialLinks = Object.entries(me.social).reduce(
-        (out: Record<string, string>, [type, value]) => {
-          out[type] = socialLinkFormatMap[type]?.(value) ?? value
-          return out
-        },
-        {}
-      )
-
-      return Object.assign(socialLinks, me.links)
-    }
-
-    return me.links
-  }
-
-  /**
    * Github last event api fetch
    * @returns {GithubEvent | null}
    */
   @FieldResolver((_returns) => GithubEvent, { nullable: true })
   async lastGithubEvent(@Root() me: Me): Promise<GithubEvent | null> {
-    const githubUsername = me.social?.github
-    if (!githubUsername) {
+    if (!me.githubAccount) {
       return null
     }
 
     const response = await octokit.activity
       .listPublicEventsForUser({
-        username: githubUsername,
+        username: me.githubAccount,
       })
       .catch(() => {
         // silence
@@ -75,7 +45,7 @@ export abstract class MeResolver implements ResolverInterface<Me> {
 
     if (response && response?.data) {
       return Object.assign(new GithubEvent(), response.data.shift(), {
-        link: `http://github.com/${githubUsername}`,
+        link: `http://github.com/${me.githubAccount}`,
       })
     }
 

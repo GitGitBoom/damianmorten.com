@@ -14,11 +14,20 @@ Default.parameters = {
     data: {
       me: {
         name: 'Mocked Name',
-        social: {
-          github: 'storybookjs',
-          stackoverflow: '123456',
-          email: 'sample@example.com',
-        },
+        links: [
+          {
+            title: 'Email',
+            url: 'mailto:me@emample.com',
+            bg: 'teal.300',
+            icon: ['fas', 'envelope'],
+          },
+          {
+            title: 'Github',
+            url: 'https://github.com',
+            bg: 'teal.400',
+            icon: ['fab', 'github'],
+          },
+        ],
         lastGithubEvent: {
           type: 'CommitComment',
           link: 'https://github.com',
