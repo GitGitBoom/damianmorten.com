@@ -21,7 +21,7 @@
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
-      "@/constants/*": ["./src/constants/*"],
+      "@/config/*": ["./src/config/*"],
       "@/graphql/*": ["./src/graphql/*"],
       "@/components/*": ["./src/components/*"],
       "@/atoms/*": ["./src/components/atoms/*"],

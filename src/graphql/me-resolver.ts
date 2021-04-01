@@ -5,7 +5,7 @@ import {
   FieldResolver,
   ResolverInterface,
 } from 'type-graphql'
-import * as HardCodedMe from '@/constants/me'
+import * as HardCodedMe from 'src/config/me'
 import { Me, GithubEvent, Links } from '@/graphql/me-type'
 import { Octokit } from '@octokit/rest'
 const octokit = new Octokit()
