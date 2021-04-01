@@ -18,7 +18,7 @@ export const links = [
     icon: ['fas', 'envelope'],
   },
   {
-    title: 'Github',
+    title: 'GitHub',
     url: 'https://github.com/GitGitBoom',
     bg: 'teal.400',
     icon: ['fab', 'github'],
@@ -33,6 +33,6 @@ export const links = [
     title: 'CV',
     url: 'example.com',
     bg: 'teal.600',
-    icon: ['fas', 'list'],
+    icon: ['far', 'file'],
   },
 ]
