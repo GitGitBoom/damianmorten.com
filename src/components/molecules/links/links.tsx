@@ -1,13 +1,8 @@
 import { Flex } from '@chakra-ui/react'
 import { FlappyBox } from '@/components/atoms/flappy-box'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faStackOverflow, faGithub } from '@fortawesome/free-brands-svg-icons'
-import { faEnvelope, faList } from '@fortawesome/free-solid-svg-icons'
 import { Link } from '@/atoms/link'
 import type { Me } from '@/graphql/me-type'
-
-library.add(faStackOverflow, faGithub, faList, faEnvelope)
 
 export interface Props {
   links: Me['links']

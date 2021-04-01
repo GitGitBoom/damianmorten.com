@@ -1,7 +1,7 @@
 import theme from '../theme'
 import { ChakraProvider } from '@chakra-ui/react'
 import { AppProps } from 'next/app'
-
+import '@/config/icons'
 export default function MyApp({
   Component,
   pageProps,
