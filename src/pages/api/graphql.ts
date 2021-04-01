@@ -15,7 +15,6 @@ export default async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
-
   if (Handler) return Handler(req, res)
 
   const schema = await buildSchema({
