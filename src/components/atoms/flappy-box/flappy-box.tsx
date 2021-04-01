@@ -109,12 +109,8 @@ export const FlappyBox: React.FC<Props> = (props) => {
       flex="1"
       {...restOfProps}
       transformOrigin={direction}
-      onMouseEnter={() => {
-        rotateSpring.set(HoverDegreeMap[direction])
-      }}
-      onMouseLeave={() => {
-        rotateSpring.set(0)
-      }}
+      onMouseEnter={() => rotateSpring.set(HoverDegreeMap[direction])}
+      onMouseLeave={() => rotateSpring.set(0)}
       style={{
         [RotateMap[direction]]: rotateSpring,
         boxShadow,
