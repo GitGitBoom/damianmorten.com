@@ -1,4 +1,5 @@
 import { Field, ObjectType } from 'type-graphql'
+import type { FontAwesomeIconProps } from '@fortawesome/react-fontawesome'
 
 /**
  * Reference: https://docs.github.com/en/developers/webhooks-and-events/github-event-types
@@ -53,21 +54,6 @@ export class GithubEvent {
 }
 
 /**
- * User social accounts
- */
-@ObjectType()
-export class Social {
-  @Field((_type) => String)
-  email!: string
-
-  @Field((_type) => String)
-  github!: string
-
-  @Field((_type) => String)
-  stackoverflow!: string
-}
-
-/**
  * Latest project
  */
 @ObjectType()
@@ -86,9 +72,18 @@ export class Project {
  * Links
  */
 @ObjectType()
-export class Links extends Social {
+export class Link {
   @Field((_type) => String)
-  cv!: string
+  title!: string
+
+  @Field((_type) => String)
+  url!: string
+
+  @Field((_type) => String)
+  bg!: string
+
+  @Field((_type) => [String, String])
+  icon!: FontAwesomeIconProps['icon']
 }
 
 /**
@@ -99,13 +94,14 @@ export class Me {
   @Field((_type) => String)
   name!: string
 
-  @Field((_type) => Social)
-  social!: Social
+  @Field((_type) => String)
+  githubAccount!: string
 
   @Field((_type) => Project, { nullable: true })
   currentProject?: Project
 
-  links!: Links
+  @Field((_type) => [Link])
+  links!: Link[]
 
   // Currently @FieldResolver won't fire on @Field - bug
   lastGithubEvent?: GithubEvent | null

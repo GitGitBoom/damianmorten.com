@@ -2,7 +2,7 @@ import { Flex, Heading } from '@chakra-ui/react'
 import { FlappyBox } from '@/atoms/flappy-box'
 import { LatestGithub } from '@/molecules/latest-github'
 import { CurrentProject } from '@/components/molecules/current-project'
-import { SocialIcons } from '@/molecules/social-icons'
+import { Links } from '@/components/molecules/links'
 import { StaggerTiming } from '@/components/atoms/stagger-timing'
 import type { HTMLChakraProps } from '@chakra-ui/react'
 import useSWR from 'swr'
@@ -12,11 +12,12 @@ import type { Me } from '@/graphql/me-type'
 const query = `{
   me {
     name,
-    social {
-      email,
-      github,
-      stackoverflow
-    },
+    links {
+      url,
+      title,
+      icon,
+      bg
+    }
     currentProject {
       title,
       link,
@@ -44,7 +45,7 @@ export const FlappyGrid: React.FC<HTMLChakraProps<'div'>> = () => {
           <FlappyBox openOrigin="top" padding={20} bg="blue.400">
             <Heading variant="h1">{me.name}</Heading>
           </FlappyBox>
-          {me.social && <SocialIcons social={me.social} />}
+          {me.links && <Links links={me.links} />}
         </Flex>
 
         <Flex direction={['column', 'column-reverse']}>
