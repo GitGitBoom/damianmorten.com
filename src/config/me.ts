@@ -25,7 +25,7 @@ export const links = [
   },
   {
     title: 'StackOverFlow',
-    url: 'https://stackoverflow.com/13885615',
+    url: 'https://stackoverflow.com/users/13885615',
     bg: 'teal.500',
     icon: ['fab', 'stack-overflow'],
   },
