@@ -12,9 +12,15 @@ export default {
 const Template: Story<Props> = (args) => (
   <StaggerTiming {...args}>
     <Flex>
-      <FlappyBox p={10} bg="cyan.600" />
-      <FlappyBox p={10} bg="cyan.700" />
-      <FlappyBox p={10} bg="cyan.800" />
+      <FlappyBox p={10} bg="cyan.600">
+        1
+      </FlappyBox>
+      <FlappyBox p={10} bg="cyan.700">
+        2
+      </FlappyBox>
+      <FlappyBox p={10} bg="cyan.800">
+        3
+      </FlappyBox>
     </Flex>
   </StaggerTiming>
 )

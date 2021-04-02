@@ -1,5 +1,6 @@
 import React from 'react'
 import { Hero } from '@/organisms/hero'
+import { swrMockData } from '@/__mocks__/components/flappy-grid'
 import type { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {
@@ -15,3 +16,7 @@ export default {
 const Template: Story = (args) => <Hero {...args} />
 
 export const Default = Template.bind({})
+
+Default.parameters = {
+  useSWR: swrMockData,
+}

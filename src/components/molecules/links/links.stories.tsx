@@ -1,12 +1,13 @@
-import { SocialIcons, Props } from './links'
+import { Links, Props } from './links'
 import type { Story, Meta } from '@storybook/react/types-6-0'
+import '@/config/icons'
 
 export default {
-  title: 'Molecules/Social Icons',
-  component: SocialIcons,
+  title: 'Molecules/Links',
+  component: Links,
 } as Meta
 
-const Template: Story<Props> = (args) => <SocialIcons {...args} />
+const Template: Story<Props> = (args) => <Links {...args} />
 
 export const Default = Template.bind({})
 Default.args = {
