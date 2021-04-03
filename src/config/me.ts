@@ -31,7 +31,7 @@ export const links = [
   },
   {
     title: 'CV',
-    url: 'example.com',
+    url: '/cv.pdf',
     bg: 'teal.600',
     icon: ['far', 'file'],
   },
