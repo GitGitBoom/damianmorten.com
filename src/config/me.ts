@@ -2,7 +2,7 @@
  * Basic identity fields
  */
 export const name = 'Damian Morten'
-export const gitHubAccount = 'GitGitBoom'
+export const githubAccount = 'GitGitBoom'
 
 export const currentProject = {
   title: 'Divulge',

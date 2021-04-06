@@ -33,15 +33,15 @@ export const LatestGithub: React.FC<Props> = (props) => {
   return (
     <Link href={link} isExternal>
       <FlappyBox {...boxProps}>
-        <Text mb={2} textTransform="uppercase" textAlign="center" fontSize="xs">
-          Latest Action
-        </Text>
-
         <Box fontSize={75}>
           <FontAwesomeIcon icon={faGithub} />
         </Box>
 
-        <Text textAlign="center" fontSize="xl" mt={2}>
+        <Text textTransform="uppercase" textAlign="center" fontSize="xs">
+          Latest Action
+        </Text>
+
+        <Text textAlign="center" fontSize="lg" fontWeight={900} mt={2}>
           {EventMessageMap[type]}
         </Text>
       </FlappyBox>
