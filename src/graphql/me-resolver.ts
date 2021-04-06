@@ -44,9 +44,11 @@ export abstract class MeResolver implements ResolverInterface<Me> {
       })
 
     if (response && response?.data) {
-      return Object.assign(new GithubEvent(), response.data.shift(), {
-        link: `http://github.com/${me.githubAccount}`,
-      })
+      const lastEvent = response.data.shift()
+      const slug = lastEvent?.repo?.name ?? me.githubAccount
+      const link = `http://github.com/${slug}`
+
+      return Object.assign(new GithubEvent(), lastEvent, { link })
     }
 
     return null
