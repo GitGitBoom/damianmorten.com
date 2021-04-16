@@ -1,12 +1,11 @@
 import { Text, Box } from '@chakra-ui/react'
 import { Link } from '@/atoms/link'
-import { FlappyBox } from '@/atoms/flappy-box'
-import type { Props as FlappyBoxProps } from '@/atoms/flappy-box'
+import { FlappyBox, Props as FlappyBoxProps } from '@/atoms/flappy-box'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { GithubEventTypes } from '@/graphql/me-type'
 
-const EventMessageMap = {
+const EventMessageMap: Record<keyof GithubEventTypes, string> = {
   CommitCommentEvent: 'Commented on a commit',
   CreateEvent: 'Created a new branch',
   DeleteEvent: 'Deleted a branch',
