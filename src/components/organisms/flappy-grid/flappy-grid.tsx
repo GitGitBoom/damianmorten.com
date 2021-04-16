@@ -1,12 +1,12 @@
 import { Flex, Heading } from '@chakra-ui/react'
 import { FlappyBox } from '@/atoms/flappy-box'
 import { LatestGithub } from '@/molecules/latest-github'
-import { CurrentProject } from '@/components/molecules/current-project'
-import { Links } from '@/components/molecules/links'
-import { StaggerTiming } from '@/components/atoms/stagger-timing'
-import type { HTMLChakraProps } from '@chakra-ui/react'
+import { CurrentProject } from '@/molecules/current-project'
+import { Links } from '@/molecules/links'
+import { StaggerTiming } from '@/atoms/stagger-timing'
 import useSWR from 'swr'
 import fetcher from '@/graphql/fetch'
+import type { HTMLChakraProps } from '@chakra-ui/react'
 import type { Me } from '@/graphql/me-type'
 
 const query = `{

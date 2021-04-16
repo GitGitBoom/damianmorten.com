@@ -1,11 +1,11 @@
 import { Head } from '@/atoms/head'
-import { Hero } from '@/components/organisms/hero'
+import { Home } from '@/templates/home'
 
 export default function HomePage(): React.ReactNode {
   return (
     <>
       <Head />
-      <Hero />
+      <Home />
     </>
   )
 }

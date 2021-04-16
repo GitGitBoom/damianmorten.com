@@ -1,11 +1,10 @@
-import React from 'react'
-import { Hero } from '@/organisms/hero'
+import { Home } from '@/templates/home'
 import { swrMockData } from '@/__mocks__/components/flappy-grid'
 import type { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {
-  title: 'Organisms/Hero',
-  component: Hero,
+  title: 'Templates/Home',
+  component: Home,
   parameters: {
     backgrounds: {
       default: 'dark',
@@ -13,7 +12,7 @@ export default {
   },
 } as Meta
 
-const Template: Story = (args) => <Hero {...args} />
+const Template: Story = (args) => <Home {...args} />
 
 export const Default = Template.bind({})
 

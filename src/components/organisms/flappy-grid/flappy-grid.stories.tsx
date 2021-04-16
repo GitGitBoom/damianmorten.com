@@ -3,7 +3,7 @@ import { swrMockData } from '@/__mocks__/components/flappy-grid'
 import type { Story, Meta } from '@storybook/react/types-6-0'
 
 export default {
-  title: 'Molecules/FlappyGrid',
+  title: 'Organism/FlappyGrid',
   component: FlappyGrid,
 } as Meta
 

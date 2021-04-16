@@ -1,9 +1,9 @@
 import { useState, useCallback } from 'react'
 import { Particles } from '@/atoms/particles'
-import { FlappyGrid } from '@/molecules/flappy-grid'
+import { FlappyGrid } from '@/organisms/flappy-grid'
 import { Box, Flex } from '@chakra-ui/react'
 
-export const Hero: React.FC = () => {
+export const Home: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   const onLoaded = useCallback(() => {
     setTimeout(() => setIsLoaded(true), 1000)
