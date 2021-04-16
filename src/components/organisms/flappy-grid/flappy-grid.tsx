@@ -43,7 +43,9 @@ export const FlappyGrid: React.FC<HTMLChakraProps<'div'>> = () => {
       <Flex direction={['column', 'row']}>
         <Flex direction="column">
           <FlappyBox openOrigin="top" padding={20} bg="blue.400">
-            <Heading variant="h1">&#123; {me.name} &#125;</Heading>
+            <Heading variant="h1" whiteSpace="nowrap">
+              &#123; {me.name} &#125;
+            </Heading>
           </FlappyBox>
           {me.links && <Links links={me.links} />}
         </Flex>
