@@ -29,6 +29,7 @@
       "@/__mocks__/*": ["./__mocks__/*"],
       "@/molecules/*": ["./src/components/molecules/*"],
       "@/organisms/*": ["./src/components/organisms/*"],
+      "@/templates/*": ["./src/components/templates/*"],
     },
   },
   "exclude": ["node_modules"],
