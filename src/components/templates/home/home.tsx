@@ -5,9 +5,7 @@ import { Box, Flex, CircularProgress } from '@chakra-ui/react'
 
 export const Home: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false)
-  const onLoaded = useCallback(() => {
-    setTimeout(() => setIsLoaded(true), 1000)
-  }, [])
+  const onLoaded = useCallback(() => setIsLoaded(true), [])
 
   return (
     <>
