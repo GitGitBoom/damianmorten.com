@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Particles } from '@/atoms/particles'
 import { FlappyGrid } from '@/organisms/flappy-grid'
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, CircularProgress } from '@chakra-ui/react'
 
 export const Home: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -18,7 +18,11 @@ export const Home: React.FC = () => {
         position="relative"
         zIndex={1}
       >
-        {isLoaded && <FlappyGrid className="avoid-grid" />}
+        {isLoaded ? (
+          <FlappyGrid className="avoid-grid" />
+        ) : (
+          <CircularProgress isIndeterminate color="gray.700" />
+        )}
       </Flex>
 
       <Box
