@@ -31,7 +31,8 @@ export const links = [
   },
   {
     title: 'CV',
-    url: '/cv.pdf',
+    url:
+      'https://docs.google.com/document/d/14RwlYIg3hNzvZiCN96JssT8zOkx0VEqaJsVjG3UdZgM/export?format=pdf',
     bg: 'teal.600',
     icon: ['far', 'file'],
   },
