@@ -39,7 +39,7 @@ export const FlappyGrid: React.FC<HTMLChakraProps<'div'>> = () => {
   }
 
   return (
-    <StaggerTiming staggerBy={400} wait={1500}>
+    <StaggerTiming staggerBy={400}>
       <Flex direction={['column', 'row']}>
         <Flex direction="column">
           <FlappyBox openOrigin="top" padding={20} bg="blue.400">
