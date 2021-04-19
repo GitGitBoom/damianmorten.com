@@ -17,7 +17,7 @@
   "lint-staged": {
     "*.(ts|tsx)": [
       "yarn format",
-      "eslint"
+      "eslint --fix"
     ]
   },
   "dependencies": {
