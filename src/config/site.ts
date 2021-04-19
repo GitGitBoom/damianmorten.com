@@ -5,6 +5,8 @@ export const titleBase = 'Damian Morten | Software Developer'
 
 export const icon = 'images/favicon.svg'
 
+export const gaTrackingCode = 'UA-24042009-1'
+
 export const SEO = {
   locale: 'en_US',
   sitename: 'Damian Morten | Software Developer',
