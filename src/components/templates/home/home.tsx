@@ -1,11 +1,15 @@
-import { useState, useCallback } from 'react'
 import { Particles } from '@/atoms/particles'
 import { FlappyGrid } from '@/organisms/flappy-grid'
 import { Box, Flex, CircularProgress } from '@chakra-ui/react'
+import { useLoadImages } from '@/hooks/load-images'
+
+import ImagesConfig from '@/config/bg-images'
+
+const imageUrls = ImagesConfig.map((i) => i.src)
 
 export const Home: React.FC = () => {
-  const [isLoaded, setIsLoaded] = useState(false)
-  const onLoaded = useCallback(() => setIsLoaded(true), [])
+  // const [isLoaded, setIsLoaded] = useState(false)
+  const isLoaded = useLoadImages(imageUrls)
 
   return (
     <>
@@ -33,7 +37,7 @@ export const Home: React.FC = () => {
         bottom={0}
         zIndex={0}
       >
-        <Particles loaded={onLoaded} />
+        <Particles />
       </Box>
     </>
   )
