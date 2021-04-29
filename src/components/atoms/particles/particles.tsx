@@ -29,7 +29,7 @@ export class Particles extends PureComponent<Props> {
       },
       particles: {
         shape: {
-          type: ['images'],
+          type: 'images',
           image: ImagesConfig.map((data) => ({
             ...data,
             replaceColor: true,
