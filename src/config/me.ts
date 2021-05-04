@@ -32,7 +32,7 @@ export const links = [
   {
     title: 'CV',
     url:
-      'https://docs.google.com/document/d/14RwlYIg3hNzvZiCN96JssT8zOkx0VEqaJsVjG3UdZgM/export?format=pdf',
+      'https://docs.google.com/document/d/1uG7_JWp7hG6CssupZdQ-fTLKDmtpuhmmc9tfIB1xD08/export?format=pdf',
     bg: 'teal.600',
     icon: ['far', 'file'],
   },
