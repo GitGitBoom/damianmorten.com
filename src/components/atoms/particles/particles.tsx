@@ -3,18 +3,14 @@ import dynamic from 'next/dynamic'
 import { DivType } from 'react-tsparticles'
 import omit from 'lodash/omit'
 import ImagesConfig from '@/config/bg-images'
-import type { ISourceOptions } from 'react-tsparticles'
-
-// TODO: use proper IParticlesProps when fixed by author (currently 'any')
-// import type { IParticlesProps } from 'react-tsparticles'
+import type { ISourceOptions, IParticlesProps } from 'react-tsparticles'
 
 const ParticlesBase = dynamic(() => import('react-tsparticles'), {
   ssr: false,
 })
 
-export interface Props {
+export interface Props extends IParticlesProps {
   avoidSelectors?: string[]
-  loaded?: () => void | Promise<void>
 }
 
 export class Particles extends PureComponent<Props> {
@@ -30,10 +26,7 @@ export class Particles extends PureComponent<Props> {
       particles: {
         shape: {
           type: 'images',
-          image: ImagesConfig.map((data) => ({
-            ...data,
-            replaceColor: true,
-          })),
+          image: ImagesConfig,
         },
         links: {
           enable: false,
@@ -47,12 +40,7 @@ export class Particles extends PureComponent<Props> {
           limit: 40,
         },
         color: {
-          value: '#fff',
-          animation: {
-            enable: true,
-            speed: 50,
-            sync: true,
-          },
+          value: '#FFF',
         },
         move: {
           enable: true,
