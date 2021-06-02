@@ -5,6 +5,8 @@ import { Box, Flex, CircularProgress } from '@chakra-ui/react'
 
 export const Home: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false)
+
+  // Avoid particle canvas re-renders
   const onLoaded = useCallback(() => setIsLoaded(true), [])
 
   return (
