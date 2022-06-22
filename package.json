@@ -33,7 +33,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@octokit/rest": "^18.3.5",
     "@types/lodash": "^4.14.168",
-    "apollo-server-micro": "^2.21.2",
+    "apollo-server-micro": "^3.0.0",
     "class-validator": "^0.13.1",
     "framer-motion": "^3.10.3",
     "graphql": "^15.5.0",
